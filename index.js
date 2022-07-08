@@ -65,9 +65,18 @@ console.log(addMovie);
 
 function deleteMovie(event){
     event.target.parentNode.remove();
+    revealMessage();
+
+    message.textContent = `${event.target.parentNode.firstChild.textContent} deleted`
+
+    
 }
 
 console.log(deleteMovie);
+
+//At the bottom of the deleteMovie function, call revealMessage
+
+
 
 //Now that we can add and remove movies from our list, we can add to our app by allowing users to mark items as watched by clicking on a movie’s title. The CSS has already been set up to display list items differently if they have the checked class. We need to create a function that will toggle the checked class on any movie title.
 
@@ -79,14 +88,31 @@ console.log(deleteMovie);
 function crossOffMovie(event){
     event.target.classList.toggle('checked');
     if (event.target.classList.contains('checked') === true){
-        message.textContent = 'watched movie'
+        // message.textContent = 'watched movie'
+        message.textContent = `${event.target.textContent} watched`
     } else {
-        message.textContent = 'movie added'
+        // message.textContent = 'movie added'
+        message.textContent = `${event.target.textContent} added`
     }
+
+    //Invoke revealMessage at the bottom of the crossOffMovie function
+
+    revealMessage();
 }
 
 // Finally, we need to add this function as an event handler for every movie title. In the addMovie function, after you set the textContent of the span element, use addEventListener to listen for a click event on the span and run the crossOffMovie function.
-// **add to addMovie function**
+// **added to addMovie function**
 
 
+// Create a function called revealMessage. Inside the function, call setTimeout, passing in a callback function and a time in milliseconds. - The callback function should add the hide class to message, you can see what the hide class does in the CSS file - We want the callback function to run 1 second after setTimeout is invoked, so for the second argument, pass in the number 1000
+
+
+function revealMessage(){
+    message.classList.remove('hide')
+
+    setTimeout(() => {
+        message.classList.add('hide')
+    }, 1000)
+
+}
 
